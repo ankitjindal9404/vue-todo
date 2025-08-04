@@ -35,12 +35,4 @@ pipeline {
             }
         }
     }
-    post {
-    always {
-      junit 'coverage/*.xml' // if you configure test coverage
-      cleanWs()
-    }
-  }
-
-
 }

@@ -8,28 +8,28 @@ pipeline {
     stages {
         stage('Install') {
             steps {
-                sh '''
+                bat '''
                     npm ci
                     '''
             }
         }
         stage('Unit test') {
             steps {
-                sh '''
+                bat '''
                     npm run test:unit
                     '''
             }
         }
         stage('Build') {
             steps {
-                sh '''
+                bat '''
                     npm run build
                     '''
             }
         }
         stage('E2E Test') {
             steps {
-                sh '''
+                bat '''
                     npm run test:e2e
                     '''
             }

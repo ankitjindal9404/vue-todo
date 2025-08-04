@@ -1,6 +1,10 @@
 pipeline {
     agent any
 
+    tools {
+        nodejs 'nodejs18' // Name of your Jenkins nodejs tool (configure in Manage Jenkins > Global Tool Configuration)
+    }
+
     stages {
         stage('Install') {
             steps {

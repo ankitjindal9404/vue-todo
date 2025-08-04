@@ -27,6 +27,13 @@ pipeline {
         }
 
         stage('Install') {
+            agent {
+                docker {
+                    image 'node:22.11.0-alpine3.20'
+                    args '-u root'
+                    reuseNode true
+                }
+            }
             steps {
                 bat '''
                     npm ci
@@ -34,6 +41,13 @@ pipeline {
             }
         }
         stage('Unit test') {
+            agent {
+                docker {
+                    image 'node:22.11.0-alpine3.20'
+                    args '-u root'
+                    reuseNode true
+                }
+            }
             steps {
                 bat '''
                     npm run test:unit
@@ -41,6 +55,13 @@ pipeline {
             }
         }
         stage('Build') {
+            agent {
+                docker {
+                    image 'node:22.11.0-alpine3.20'
+                    args '-u root'
+                    reuseNode true
+                }
+            }
             steps {
                 bat '''
                     npm run build
@@ -48,6 +69,13 @@ pipeline {
             }
         }
         stage('E2E Test') {
+            agent {
+                docker {
+                    image 'node:22.11.0-alpine3.20'
+                    args '-u root'
+                    reuseNode true
+                }
+            }
             steps {
                 bat '''
                     npm run test:e2e
@@ -56,10 +84,17 @@ pipeline {
         }
 
         stage('Deploymeent') {
+            agent {
+                docker {
+                    image 'node:22.11.0-alpine3.20'
+                    args '-u root'
+                    reuseNode true
+                }
+            }
             steps {
                 bat '''
-                    npm install vercel
-                    npx vercel --prod --token=$VERCEL_TOKEN --confirm --name=cicdproject
+                    npm install -g vercel
+                    vercel --prod --token=$VERCEL_TOKEN --confirm --name=cicdproject
                     '''
             }
         }
